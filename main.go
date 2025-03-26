@@ -24,6 +24,11 @@ type Todo struct {
 var db *gorm.DB
 
 func main() {
+	// Set Gin to release mode in production
+	if os.Getenv("GIN_MODE") == "release" {
+		gin.SetMode(gin.ReleaseMode)
+	}
+
 	// Load environment variables
 	if err := godotenv.Load(); err != nil {
 		log.Println("No .env file found")
